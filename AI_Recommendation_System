@@ -1,0 +1,39 @@
+courses = {
+    "Python Basics": ["python", "programming"],
+    "AI Fundamentals": ["ai", "machine learning"],
+    "Data Science": ["data", "python"],
+    "Web Development": ["html", "css", "javascript"],
+    "Deep Learning": ["ai", "deep learning"]
+}
+
+user_input = input(
+    "Enter your interests separated by commas: "
+).lower()
+
+user_interests = [
+    interest.strip()
+    for interest in user_input.split(",")
+]
+
+recommendations = []
+
+for course, tags in courses.items():
+
+    score = 0
+
+    for interest in user_interests:
+        if interest in tags:
+            score += 1
+
+    if score > 0:
+        recommendations.append((course, score))
+
+recommendations.sort(
+    key=lambda x: x[1],
+    reverse=True
+)
+
+print("\nRecommended Courses:\n")
+
+for course, score in recommendations:
+    print(course, "Match Score:", score)
